@@ -172,56 +172,44 @@ LibrarySystem/
 │   └── borrowings.png
 │
 └── README.md
-⚙️ Local Installation
-1. Install XAMPP
 
-Install XAMPP and start:
+## ⚙️ Local Installation
 
-Apache
-MySQL
-2. Place the Project
+### 1. Install XAMPP
+
+Install XAMPP and start Apache and MySQL.
+
+### 2. Place the Project
 
 Copy the project folder into:
 
 C:\xampp\htdocs\
-3. Create the Database
 
-Open:
+### 3. Create the Database
 
-http://localhost/phpmyadmin/
-
-Create a database named:
-
-library_db
+Open http://localhost/phpmyadmin/ and create a database named `library_db`.
 
 Import the required database tables into the database.
 
-4. Configure Database Connection
+### 4. Configure Database Connection
 
-For local XAMPP development, configure db.php with your local MySQL credentials.
+For local XAMPP development, configure `db.php` with your local MySQL credentials.
 
 Typical XAMPP configuration:
 
-Host: localhost
-Username: root
-Password:
-Database: library_db
-5. Run the Project
+- Host: `localhost`
+- Username: `root`
+- Password: empty
+- Database: `library_db`
+
+### 5. Run the Project
 
 Open:
 
 http://localhost/LibrarySystem/
-🌐 Deployment
 
-The project is deployed using InfinityFree.
+---
 
-The live application is available at:
-
-https://booknest.infinityfree.io/
-
-The database is hosted using the MySQL database service provided by the hosting platform.
-
-Sensitive database configuration is not included in the public GitHub repository.
 
 🎯 Project Objectives
 
