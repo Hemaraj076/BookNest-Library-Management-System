@@ -1,0 +1,5 @@
+db.php
+.env
+*.log
+.vscode/
+database_setup.sql

@@ -1,0 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['id'], $_SESSION['role']) || $_SESSION['role'] !== 'admin') { header('Location: dashboard.php'); exit; }
+include 'db.php';
+$result = $conn->query("SELECT id, full_name, roll_no, department, mobile, email, role FROM members ORDER BY id DESC");
+$counts = ['student'=>0,'faculty'=>0,'admin'=>0];
+foreach ($conn->query("SELECT role, COUNT(*) c FROM members GROUP BY role") as $r) { if(isset($counts[$r['role']])) $counts[$r['role']] = (int)$r['c']; }
+?>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Manage Members | BookNest</title><link rel="stylesheet" href="style.css"></head>
+<body class="app-body"><header class="topbar"><a class="top-brand" href="dashboard.php">📚 BookNest <small>Library</small></a><div class="user-chip">🛡️ <?=htmlspecialchars($_SESSION['name'])?><span class="role-pill">Admin</span></div></header>
+<div class="app-layout"><aside class="sidebar"><div class="side-role"><span class="big-icon">🛡️</span><div><strong>Admin</strong><small><?=htmlspecialchars($_SESSION['department'])?></small></div></div><nav><a href="dashboard.php">🏠 <span>Dashboard</span></a><a href="view_books.php">📖 <span>View Books</span></a><a href="add_book.php">➕ <span>Add Book</span></a><a href="manage_borrowings.php">🔄 <span>Manage Borrowings</span></a><a class="active" href="manage_members.php">👥 <span>Manage Members</span></a><a href="logout.php">🚪 <span>Logout</span></a></nav><div class="sidebar-footer">BookNest v2.2<br><small>Role-Based Library</small></div></aside>
+<main class="main-content"><div class="page-head"><div><div class="eyebrow">ADMIN CONTROL</div><h1>👥 Manage Members</h1><p>View registered students, faculty and administrators.</p></div><div class="head-actions"><a class="secondary-btn" href="dashboard.php">🏠 Dashboard</a></div></div>
+<div class="member-summary"><div><strong><?=$counts['student']?></strong><span>Students</span></div><div><strong><?=$counts['faculty']?></strong><span>Faculty</span></div><div><strong><?=$counts['admin']?></strong><span>Admins</span></div></div>
+<div class="table-card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Role</th><th>ID / Roll No</th><th>Department</th><th>Mobile</th><th>Email</th></tr></thead><tbody><?php if($result->num_rows===0): ?><tr><td colspan="7" class="empty">No members found.</td></tr><?php else: while($r=$result->fetch_assoc()): ?><tr><td>#<?= (int)$r['id'] ?></td><td><strong><?=htmlspecialchars($r['full_name'])?></strong></td><td><span class="role-tag role-<?=htmlspecialchars($r['role'])?>"><?=ucfirst(htmlspecialchars($r['role']))?></span></td><td><?=htmlspecialchars($r['roll_no'])?></td><td><?=htmlspecialchars($r['department'])?></td><td><?=htmlspecialchars($r['mobile'])?></td><td><?=htmlspecialchars($r['email'])?></td></tr><?php endwhile; endif; ?></tbody></table></div></div></main></div></body></html>
