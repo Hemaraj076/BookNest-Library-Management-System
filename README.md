@@ -5,8 +5,7 @@ BookNest is a web-based Library Management System designed to simplify and digit
 The system provides separate access and permissions for Students, Faculty, and Administrators.
 
 🌐 Live Demo
-
-BookNest: https://booknest.infinityfree.io/
+https://booknest.infinityfree.io/
 
 ✨ Features
 🔐 Authentication
@@ -253,7 +252,7 @@ Git and GitHub
 
 Hemaraj Vydani
 
-GitHub:
+💻 GitHub:
 https://github.com/Hemaraj076
 
 Project Repository:
